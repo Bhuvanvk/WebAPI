@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Hosting;
 using WebAPI.Filters;
 using WebAPI.Middleware;
 using WebAPI.Repositories.Implementations;
@@ -15,6 +16,7 @@ builder.Services.AddControllers(options =>
     options.Filters.Add(typeof(ActionFilter)); // Add the filter globally
 });
 
+//builder.Services.addsw
 builder.Services.AddLogging();
 builder.Services.AddScoped<ISubmissionServiceRepo, SubmissionServiceRepo>();
 builder.Services.AddScoped<ISubmissionService, SubmissionService>();
@@ -25,6 +27,11 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
+app.UseCors(option => {
+    option.AllowAnyHeader();
+    option.AllowAnyMethod();
+    option.AllowAnyOrigin();
+    });
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

@@ -12,7 +12,7 @@ namespace WebAPI.Repositories.Implementations
         // private readonly ILogger _logger;
         public SubmissionServiceRepo(IConfiguration connectionstring)
         {
-            _connectionstring = connectionstring.GetConnectionString("DevDb");
+            _connectionstring = connectionstring.GetConnectionString("DefaultConnection");
 
         }
         public void DeleteSubmission(int id)
