@@ -55,14 +55,14 @@ namespace WebAPI.Repositories.Implementations
                 {
                     // new to update the columns 
                     connection.Open();
-                    var selectQuery = "INSERT INTO Tbl_Registration (ManagerBEMSID, IsRestrictedContent,IsBehindWSSO,SubmissionBEMSID) VALUES (@ManagerBEMSID, @IsRestrictedContent,@IsBehindWSSO,@SubmissionBEMSID)";
+                    var selectQuery = "INSERT INTO Tbl_Registration (SubmissionBEMSID,ManagerBEMSID, IsRestrictedContent,IsBehindWSSO,Issharepoint) VALUES (@SubmissionBEMSID, @ManagerBEMSID,@IsRestrictedContent,@IsBehindWSSO,@Issharepoint)";
                     using (var command = new SqlCommand(selectQuery, connection))
                     {
                         command.Parameters.AddWithValue("@SubmissionBEMSID", registration.SubmitterBEMSID);
                         command.Parameters.AddWithValue("@ManagerBEMSID", registration.ContentOwnersBEMSID);
                         command.Parameters.AddWithValue("@IsRestrictedContent", registration.IsRestrictedContent);
                         command.Parameters.AddWithValue("@IsBehindWSSO", registration.IsBehindWSSO);
-                        command.Parameters.AddWithValue("@SubmissionBEMSID", registration.SubmitterBEMSID);
+                        command.Parameters.AddWithValue("@Issharepoint", registration.Issharepoint);
                         command.ExecuteNonQuery();
                     }
                 }
@@ -84,13 +84,14 @@ namespace WebAPI.Repositories.Implementations
                 {
                     // new to update the columns 
                     connection.Open();
-                    var selectQuery = "UPDATE Tbl_Registration SET ManagerBEMSID = @ManagerBEMSID, IsRestrictedContent = @IsRestrictedContent,IsBehindWSSO = @IsBehindWSSO WHERE SubmissionBEMSID = @SubmissionBEMSID";
+                    var selectQuery = "UPDATE Tbl_Registration SET SubmissionBEMSID = @SubmissionBEMSID, ManagerBEMSID = @ManagerBEMSID,IsRestrictedContent = @IsRestrictedContent,IsBehindWSSO=@IsBehindWSSO,Issharepoint=@Issharepoint WHERE SubmissionBEMSID = @SubmissionBEMSID";
                     using (var command = new SqlCommand(selectQuery, connection))
                     {
                         command.Parameters.AddWithValue("@SubmissionBEMSID", registration.SubmitterBEMSID);
                         command.Parameters.AddWithValue("@ManagerBEMSID", registration.ContentOwnersBEMSID);
                         command.Parameters.AddWithValue("@IsRestrictedContent", registration.IsRestrictedContent);
                         command.Parameters.AddWithValue("@IsBehindWSSO", registration.IsBehindWSSO);
+                        command.Parameters.AddWithValue("@Issharepoint", registration.Issharepoint);
                         command.ExecuteNonQuery();
                     }
                 }
